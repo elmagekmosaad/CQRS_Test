@@ -2,6 +2,7 @@ using CQRS_lib;
 using CQRS_lib.Data;
 using CQRS_lib.Reps;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer
  (builder.Configuration.GetConnectionString("MyCon")));
 builder.Services.AddScoped<IItemsRepo,ItemRepo>();
+builder.Services.AddMediatR(typeof(MyLib).Assembly);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
